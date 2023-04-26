@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+
+    /* insert and adjust background image */
+    background-image: url(../assets/Background.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
