@@ -1,19 +1,19 @@
 .c-cardPreview {
-    margin: 20px 44px;
+    margin: 20px 25px;
     width: 200px;
     height: 250px;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
+}
+
+.c-cardPreviewButton:hover {
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 5px #fff;
     cursor: pointer;
 }
 
-.c-cardPreview:hover {
-    background-color: #fff;
-    box-shadow: 0px 0px 10px 5px white;
-}
-
-.c-cardPreview:active {
+.c-cardPreviewButton:active {
     transform: translateY(2px);
 }
 
@@ -41,5 +41,3 @@
     font-size: 20px;
     text-align: center;
 }
-
-

@@ -1,0 +1,15 @@
+.c-cardDetails__origin {
+    width: 290px;
+}
+
+.c-cardDetails__residents {
+    display: flex;
+}
+
+.c-cardDetails__residentsImg {
+    margin-right: 10px;
+}
+
+.c-cardDetails__locationInfo {
+    width: fit-content;
+}

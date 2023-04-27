@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import './style.css';
 
-import {CardPreview} from '../../components/CardPreview';
+import {CardPreviewButton} from '../../components/CardPreview/index';
+import {CardDetails} from '../../components/CardDetails';
 import {Pagination} from '../../components/Pagination';
 
 export function Home() {
@@ -10,11 +11,12 @@ export function Home() {
   const [characters, setCharacters] = useState([]);
   const [actualPage, setActualPage] = useState();
   const [pages, setPages] = useState();
+  const [personagem, setPersonagem] = useState({});
+
 
   const searchCharactersByName = async () => {
 
     try {
-      console.log(`a pagina atual é: ${actualPage}`)
       const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${characterName}&page=${actualPage}`);
       const results = await response.data.results;
       const pagesCount = await response.data.info.pages;
@@ -25,6 +27,19 @@ export function Home() {
       console.error(error);
     }
   }
+
+useEffect(() => {
+  const getCharacterByName = async () => {
+    try {
+      const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=Rick%20Sanchez&status=alive&type=Soulless%20Puppet`);
+      const retorno = await response.data.results[0];
+      setPersonagem(retorno);
+    } catch (error) {
+      console.error(error);
+  }
+}
+getCharacterByName();
+}, []);
 
   return (
     <>
@@ -38,32 +53,24 @@ export function Home() {
             placeholder='Search characters' 
             onChange={e => setCharacterName(e.target.value)}
             />
-          <button className='c-header__button' type='button' onClick={() => {searchCharactersByName()}}>Search</button>
+          <button className='c-button' type='button' onClick={() => {searchCharactersByName()}}>Search</button>
         </div>
       </section>
-
-      <Pagination 
-        pages = {pages}
-        actualPage = {actualPage}
-      />
 
       <section className='c-charactersFound'>      
         {          
           characters.map(character => (
-            <CardPreview 
-              key = {character.id}
-              avatar = {character.image}
-              name = {character.name}
-              species = {character.species}
+            <CardPreviewButton 
+              key={character.id}
+              character={character}
+              /*onClick = {() => {
+                const root = ReactDOM.createRoot(document.getElementById('root'));
+                root.render(<CardDetails character={getCharacterByName} />);
+              }}*/
             />
           )) 
         }
       </section>
-
-      <Pagination 
-        pages = {pages}
-        actualPage = {actualPage}
-      />
     </>
   )
 }
