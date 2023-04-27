@@ -13,7 +13,6 @@ export function Home() {
   const [pages, setPages] = useState();
   const [personagem, setPersonagem] = useState({});
 
-
   const searchCharactersByName = async () => {
 
     try {
@@ -25,6 +24,12 @@ export function Home() {
       setPages(pagesCount);
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  const handleKeyDown = (keyPressed) => {
+    if(keyPressed === 'Enter') {
+      searchCharactersByName();
     }
   }
 
@@ -52,7 +57,10 @@ getCharacterByName();
             type="text" 
             placeholder='Search characters' 
             onChange={e => setCharacterName(e.target.value)}
-            />
+            onKeyDown={e => {
+              handleKeyDown(e.key); 
+              setCharacterName(e.target.value);
+            }} />
           <button className='c-button' type='button' onClick={() => {searchCharactersByName()}}>Search</button>
         </div>
       </section>
@@ -63,10 +71,6 @@ getCharacterByName();
             <CardPreviewButton 
               key={character.id}
               character={character}
-              /*onClick = {() => {
-                const root = ReactDOM.createRoot(document.getElementById('root'));
-                root.render(<CardDetails character={getCharacterByName} />);
-              }}*/
             />
           )) 
         }

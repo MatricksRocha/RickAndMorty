@@ -17,9 +17,13 @@
     transform: translateY(2px);
 }
 
-.c-cardPreview__avatar {
+.c-cardPreview__avatar--alive, .c-cardPreview__avatar--dead {
     width: 100%;
     border-radius: 12px 12px 0 0;
+}
+
+.c-cardPreview__avatar--dead {
+    filter: grayscale(1);
 }
 
 .c-cardPreview__info {
