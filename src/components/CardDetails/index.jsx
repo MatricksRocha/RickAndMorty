@@ -11,6 +11,7 @@ import {Origin} from './Origin';
 export function CardDetails({character}) {
     return (
         <>
+        <div className='c-cardDetailsBackground'>
             <section className='c-cardDetails'>
                 <section className='c-cardDetails__avatarAndTopics'>
 
@@ -30,6 +31,7 @@ export function CardDetails({character}) {
                     <button className='c-button'>Close</button>
                 </section>
             </section>
+        </div>
         </>
     )
 }
