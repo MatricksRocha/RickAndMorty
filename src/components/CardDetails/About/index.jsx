@@ -5,14 +5,11 @@ import './style.css';
 export function About({character}) {
     
     const [lastSeen, setLastSeen] = useState('');
-    const gender = character.gender || '';
-    const status = character.status || '';
-    const species = character.species || '';
 
     const generatePronoun = () => {
-        if (gender === 'Male') {
+        if (character?.gender === 'Male') {
             return('He');
-        } else if (gender === 'Female') {
+        } else if (character?.gender === 'Female') {
             return('She');
         } else {
             return('It');
@@ -20,31 +17,30 @@ export function About({character}) {
     }
 
     const generateStatus = () => {
-        if (status === 'Alive') {
-            return(`${generatePronoun()} is ${(status).toLowerCase()} and well`);
-        } else if (status === 'Dead') {
-            return(`${generatePronoun()} is ${(status.toLowerCase())}`);
+        if (character?.status === 'Alive') {
+            return(`${generatePronoun()} is ${(character?.status).toLowerCase()} and well`);
+        } else if (character.status === 'Dead') {
+            return(`${generatePronoun()} is ${(character?.status).toLowerCase()}`);
         } else {
             return(`It can't be told if ${(generatePronoun()).toLowerCase()} is alive or dead`);
         }
     }
 
-useEffect(() => {
     const generateLastSeen = async () => {
-        const episode = character.episode || [];
         try {
-            const response = await axios.get((episode).slice(-1));
+            const response = await axios.get((character?.episode).slice(-1));
             setLastSeen(response.data.air_date);
         } catch (error) {
             console.error(error);
         }
     }
-    generateLastSeen();
-}, [lastSeen, gender, status, species]);
 
+useEffect(() => {
+    generateLastSeen();
+}, []);
 
     const generateAboutPhrase = () => {
-        return `${character.name} is a ${(gender).toLowerCase()} ${(species).toLowerCase()}. ${generateStatus()}. Last seen ${lastSeen}.`;
+        return `${character?.name} is a ${(character?.gender).toLowerCase()} ${(character.species).toLowerCase()}. ${generateStatus()}. Last seen ${lastSeen}.`;
     }
 
     return (

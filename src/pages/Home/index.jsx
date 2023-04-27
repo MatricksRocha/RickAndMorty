@@ -11,14 +11,13 @@ export function Home() {
   const [characters, setCharacters] = useState([]);
   const [actualPage, setActualPage] = useState();
   const [pages, setPages] = useState();
-  const [personagem, setPersonagem] = useState({});
 
   const searchCharactersByName = async () => {
 
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${characterName}&page=${actualPage}`);
-      const results = await response.data.results;
-      const pagesCount = await response.data.info.pages;
+      const results = response.data.results;
+      const pagesCount = response.data.info.pages;
 
       setCharacters(results);
       setPages(pagesCount);
@@ -32,19 +31,6 @@ export function Home() {
       searchCharactersByName();
     }
   }
-
-useEffect(() => {
-  const getCharacterByName = async () => {
-    try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=Rick%20Sanchez&status=alive&type=Soulless%20Puppet`);
-      const retorno = await response.data.results[0];
-      setPersonagem(retorno);
-    } catch (error) {
-      console.error(error);
-  }
-}
-getCharacterByName();
-}, []);
 
   return (
     <>
