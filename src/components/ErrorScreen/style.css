@@ -1,0 +1,30 @@
+.c-errorScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.c-errorScreen__image {
+    width: 400px;
+    margin-bottom: 50px;
+}
+
+.c-errorScreen p {
+    font-size: 35px;
+    font-weight: bold;
+    margin: 0 10px 20px;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .c-errorScreen__image {
+        width: 250px;
+    }
+    
+    .c-errorScreen p {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0 10px 20px;
+        text-align: center;
+    }
+}

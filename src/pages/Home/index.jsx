@@ -5,6 +5,7 @@ import './style.css';
 import {CardPreviewButton} from '../../components/CardPreview/index';
 import {PaginationComponent} from '../../components/Pagination';
 import {LoadingScreen} from '../../components/LoadingScreen';
+import {ErrorScreen} from '../../components/ErrorScreen';
 import logoImg from '../../assets/Logo.svg';
 
 export function Home() {
@@ -15,6 +16,8 @@ export function Home() {
   const [pages, setPages] = useState(1);
   const [showPagination, setShowPagination] = useState(false);
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);
+  const [showErrorScreen, setShowErrorScreen] = useState(false);
+  const [showCharactersFound, setShowCharactersFound] = useState(false);
 
   const searchCharactersByName = async (page = 1, searchDueToPagination) => {
     setCurrentPage(page);
@@ -36,11 +39,15 @@ export function Home() {
       
       setShowPagination(true);
       setShowLoadingScreen(false);
+      setShowErrorScreen(false);
+      setShowCharactersFound(true);
     } catch (error) {
       console.error(error);
+      setLastSearchedCharacter(characterName);
       setShowLoadingScreen(false);
+      setShowErrorScreen(true);
+      setShowCharactersFound(false);
     }    
-    
   }
 
   const handlePaginationChange = (page) => {
@@ -52,12 +59,10 @@ export function Home() {
   const handleSearchRequest = (character) => {
     if(lastSearchedCharacter !== character) {
       searchCharactersByName(1, false);
+    } else if(currentPage !== 1) {
+      searchCharactersByName(1, false);
     }
   }
-
-  useEffect(() => {
-    
-  }, [lastSearchedCharacter]);
 
   return (
     <>
@@ -65,33 +70,43 @@ export function Home() {
         <img className='c-header__logo' src={logoImg} alt="Rick and Morty logo" />
 
         <div className='c-header__search' >
-          <input 
-            className='c-header__input' 
-            type="text" 
-            placeholder='Search characters' 
-            onKeyUp={e => {
-              setCharacterName(e.target.value);
-              if(e.key === 'Enter') {
-                handleSearchRequest(characterName);
-              }
-            }} />
+          <div className='c-inputAndLabel'>
+            <input 
+              id='inputCharacter'
+              className='c-header__input' 
+              type="text" 
+              placeholder='Search characters' 
+              onKeyUp={e => {
+                setCharacterName(e.target.value);
+                if(e.key === 'Enter') {
+                  handleSearchRequest(characterName);
+                }
+              }} />
+            <label className='c-label' htmlFor="inputCharacter">If input is empty, all characters will be shown.</label>
+          </div>
+
           <button className='c-button' type='button' onClick={() => {handleSearchRequest(characterName)}}>Search</button>
         </div>
       </section>
 
-      <section className='c-charactersFound'>      
-        {          
-          characters.map(character => (
-            <CardPreviewButton 
-              key={character.id}
-              character={character}
-            />
-          )) 
-        }
-      </section>
+      {showCharactersFound ?
+        <section className='c-charactersFound'>      
+          {          
+            characters.map(character => (
+              <CardPreviewButton 
+                key={character.id}
+                character={character}
+              />
+            )) 
+          }
+        </section>
+        :
+        <div></div>
+      }
 
+      {showErrorScreen && <ErrorScreen />}
       {showLoadingScreen && <LoadingScreen />}
-      {showPagination && <PaginationComponent handlePaginationChange={handlePaginationChange} pages={pages} currentPage={currentPage} />}
+      {(showPagination && !showErrorScreen) && <PaginationComponent handlePaginationChange={handlePaginationChange} pages={pages} currentPage={currentPage} />}
     </>
   )
 }
