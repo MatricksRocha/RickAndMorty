@@ -16,7 +16,8 @@
 
 @media(max-width: 767px) {
     .c-cardDetails__location {
-        width: 150px;
+        width: 320px;
+        margin-bottom: 20px;
     }
 
     .c-cardDetails__locationInfoName {
