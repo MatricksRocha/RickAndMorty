@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 import './style.css';
 
@@ -8,6 +8,10 @@ export function CardPreviewButton({character}) {
     const [showCard, setShowCard] = useState(false);
 
     const avatarClassName = character.status === 'Dead' ? 'c-cardPreview__avatar--dead' : 'c-cardPreview__avatar--alive'
+
+    const handleCardDetailsButtonClick = () => {
+        setShowCard(false);
+    }
 
     return (
         <>
@@ -20,7 +24,7 @@ export function CardPreviewButton({character}) {
                 </div>
             </section>
             
-            <CardDetails character={character} showCard={showCard} />
+            {showCard && <CardDetails character={character} onCardDetailsButtonClick={handleCardDetailsButtonClick} />}
         </>
     )
 }

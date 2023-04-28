@@ -1,16 +1,11 @@
-import React, {useState, useEffect} from 'react';
-
 import './style.css';
-
 
 import {CardPreviewImage} from '../CardPreview/indexImg';
 import {About} from './About';
 import {Location} from './Location';
 import {Origin} from './Origin';
 
-export function CardDetails({character, showCard}) {   
-
-    if (showCard) {
+export function CardDetails({character, onCardDetailsButtonClick}) {   
         return (
             <>
                 <div className='c-cardDetailsBackground'>
@@ -29,13 +24,11 @@ export function CardDetails({character, showCard}) {
                             </section>
                         </section>
         
-                        <section className='c-cardDetails__closeButton'>
+                        <section className='c-cardDetails__closeButton' onClick={() => {onCardDetailsButtonClick()}}>
                             <button className='c-button'>Close</button>
                         </section>
                     </section>
                 </div>
             </>
-        );
-    }
-    return null;
+        )
 }
