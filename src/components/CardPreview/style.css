@@ -44,4 +44,13 @@
 .c-cardPreview__name {
     font-size: 20px;
     text-align: center;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.c-cardPreview__nameForCardDetails {
+    font-size: 20px;
+    text-align: center;
 }
