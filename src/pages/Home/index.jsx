@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import './style.css';
 
@@ -9,51 +9,55 @@ import logoImg from '../../assets/Logo.svg';
 
 export function Home() {
   const [characterName, setCharacterName] = useState('');
+  const [lastSearchedCharacter, setLastSearchedCharacter] = useState('Initializing different from characterName');
   const [characters, setCharacters] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [showPagination, setShowPagination] = useState(false);
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);
-  const [lastSearchedCharacter, setLastSearchedCharacter] = useState('');
 
-  const searchCharactersByName = async (page = 1) => {
+  const searchCharactersByName = async (page = 1, searchDueToPagination) => {
     setCurrentPage(page);
-    setShowPagination(true);
     setShowLoadingScreen(true);
-
+    let response;
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${characterName}&page=${page}`);
+      if(searchDueToPagination) {
+        response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${lastSearchedCharacter}&page=${page}`);
+      } else {
+        response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${characterName}&page=${page}`);
+        setLastSearchedCharacter(characterName);
+      }
+      
       const results = response.data.results;
       const pagesCount = response.data.info.pages;
 
       setCharacters(results);
       setPages(pagesCount);
-      setLastSearchedCharacter(characterName);
+      
+      setShowPagination(true);
+      setShowLoadingScreen(false);
     } catch (error) {
       console.error(error);
-    }
-    setShowLoadingScreen(false);
-  }
-
-  const handleKeyDown = (keyPressed, character) => {
-    if(keyPressed === 'Enter') {
-      //handleSearchRequest(character);
-      searchCharactersByName(1);
-    }
+      setShowLoadingScreen(false);
+    }    
+    
   }
 
   const handlePaginationChange = (page) => {
     if(currentPage !== page) {
-      //setCharacterName(lastSearchedCharacter);
-      searchCharactersByName(page);
+      searchCharactersByName(page, true);
     }
   }
 
   const handleSearchRequest = (character) => {
     if(lastSearchedCharacter !== character) {
-      searchCharactersByName(1);
+      searchCharactersByName(1, false);
     }
   }
+
+  useEffect(() => {
+    
+  }, [lastSearchedCharacter]);
 
   return (
     <>
@@ -65,12 +69,13 @@ export function Home() {
             className='c-header__input' 
             type="text" 
             placeholder='Search characters' 
-            onChange={e => setCharacterName(e.target.value)}
-            onKeyDown={e => {
-              handleKeyDown(e.key, e.target.value); 
+            onKeyUp={e => {
               setCharacterName(e.target.value);
+              if(e.key === 'Enter') {
+                handleSearchRequest(characterName);
+              }
             }} />
-          <button className='c-button' type='button' onClick={() => {searchCharactersByName(1)}}>Search</button>
+          <button className='c-button' type='button' onClick={() => {handleSearchRequest(characterName)}}>Search</button>
         </div>
       </section>
 
