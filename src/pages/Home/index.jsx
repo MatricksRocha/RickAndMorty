@@ -4,6 +4,7 @@ import './style.css';
 
 import {CardPreviewButton} from '../../components/CardPreview/index';
 import {PaginationComponent} from '../../components/Pagination';
+import {LoadingScreen} from '../../components/LoadingScreen';
 
 export function Home() {
   const [characterName, setCharacterName] = useState('');
@@ -11,10 +12,12 @@ export function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [showPagination, setShowPagination] = useState(false);
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
 
   const searchCharactersByName = async (page = 1) => {
     setCurrentPage(page);
     setShowPagination(true);
+    setShowLoadingScreen(true);
 
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${characterName}&page=${page}`);
@@ -26,6 +29,8 @@ export function Home() {
     } catch (error) {
       console.error(error);
     }
+
+    setShowLoadingScreen(false);
   }
 
   const handleKeyDown = (keyPressed) => {
@@ -68,6 +73,7 @@ export function Home() {
         }
       </section>
 
+      {showLoadingScreen && <LoadingScreen />}
       {showPagination && <PaginationComponent handlePaginationChange={handlePaginationChange} pages={pages} currentPage={currentPage} />}
     </>
   )
