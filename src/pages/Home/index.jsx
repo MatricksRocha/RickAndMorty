@@ -46,7 +46,7 @@ export function Home() {
   return (
     <>
       <section className='c-header'>
-        <img className='c-header__logo' src="./src/assets/Logo.svg" alt="" />
+        <img className='c-header__logo' src="./src/assets/Logo.svg" alt="Rick and Morty logo" />
 
         <div className='c-header__search' >
           <input 
