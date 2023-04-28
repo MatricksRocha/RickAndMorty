@@ -54,3 +54,20 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiPaginationItem-icon.css-g2z002-
 button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-sizeMedium.MuiPaginationItem-outlined.MuiPaginationItem-circular.MuiPaginationItem-outlinedSecondary.MuiPaginationItem-previousNext.css-1aczowp-MuiButtonBase-root-MuiPaginationItem-root {
     border: 0;
 }
+
+@media (max-width: 767px) {
+    .MuiPagination-ul li button {
+        font-size: 15px;
+        padding: 5px;
+        margin: 3px;
+        height: 30px;
+    }
+    
+    .MuiPagination-ul li div {
+        font-size: 20px;
+    }
+    
+    svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiPaginationItem-icon.css-g2z002-MuiSvgIcon-root-MuiPaginationItem-icon {
+        font-size: 25px;
+    }
+}

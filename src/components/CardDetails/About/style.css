@@ -6,3 +6,13 @@
 .c-cardDetails__aboutText {
     font-size: 20px;
 }
+
+@media(max-width: 767px) {
+    .c-cardDetails__about {
+        width: 320px;
+    }
+
+    .c-cardDetails__aboutText {
+        font-size: 16px;
+    }
+}

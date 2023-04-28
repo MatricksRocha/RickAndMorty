@@ -13,3 +13,13 @@
 .c-cardDetails__locationInfo {
     width: fit-content;
 }
+
+@media(max-width: 767px) {
+    .c-cardDetails__location {
+        width: 150px;
+    }
+
+    .c-cardDetails__locationInfoName {
+        font-size: 18px;
+    }
+}

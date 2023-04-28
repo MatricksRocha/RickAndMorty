@@ -54,3 +54,21 @@
     font-size: 20px;
     text-align: center;
 }
+
+@media (max-width: 767px) {
+    .c-cardPreview {
+        margin: 10px 10px;
+        width: 150px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 15px;
+    }
+
+    .c-cardPreview__nameForCardDetails {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
