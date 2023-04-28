@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import './style.css';
+import residentsImage from '../../../assets/Residents.svg'
 
 export function Origin({character}) {
 
@@ -32,7 +33,7 @@ export function Origin({character}) {
                 <p className='c-cardDetails__originInfo'><small>{originInfo?.dimension}</small></p>
 
                 {character?.origin?.url !== '' 
-                    ? <div className='c-cardDetails__residents'><img className='c-cardDetails__residentsImg c-cardDetails__originInfo' src='./src/assets/Residents.svg' alt='Residents image' /> <p className='c-cardDetails__originInfo'><small>{originInfo?.residents?.length} residents</small></p></div> 
+                    ? <div className='c-cardDetails__residents'><img className='c-cardDetails__residentsImg c-cardDetails__originInfo' src={residentsImage} alt='Residents image' /> <p className='c-cardDetails__originInfo'><small>{originInfo?.residents?.length} residents</small></p></div> 
                     : <div></div>
                 }
             </div>

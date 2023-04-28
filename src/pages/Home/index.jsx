@@ -5,6 +5,7 @@ import './style.css';
 import {CardPreviewButton} from '../../components/CardPreview/index';
 import {PaginationComponent} from '../../components/Pagination';
 import {LoadingScreen} from '../../components/LoadingScreen';
+import logoImg from '../../assets/Logo.svg';
 
 export function Home() {
   const [characterName, setCharacterName] = useState('');
@@ -13,6 +14,7 @@ export function Home() {
   const [pages, setPages] = useState(1);
   const [showPagination, setShowPagination] = useState(false);
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);
+  const [lastSearchedCharacter, setLastSearchedCharacter] = useState('');
 
   const searchCharactersByName = async (page = 1) => {
     setCurrentPage(page);
@@ -26,29 +28,37 @@ export function Home() {
 
       setCharacters(results);
       setPages(pagesCount);
+      setLastSearchedCharacter(characterName);
     } catch (error) {
       console.error(error);
     }
-
     setShowLoadingScreen(false);
   }
 
-  const handleKeyDown = (keyPressed) => {
+  const handleKeyDown = (keyPressed, character) => {
     if(keyPressed === 'Enter') {
+      //handleSearchRequest(character);
       searchCharactersByName(1);
     }
   }
 
   const handlePaginationChange = (page) => {
     if(currentPage !== page) {
+      //setCharacterName(lastSearchedCharacter);
       searchCharactersByName(page);
+    }
+  }
+
+  const handleSearchRequest = (character) => {
+    if(lastSearchedCharacter !== character) {
+      searchCharactersByName(1);
     }
   }
 
   return (
     <>
       <section className='c-header'>
-        <img className='c-header__logo' src="./src/assets/Logo.svg" alt="Rick and Morty logo" />
+        <img className='c-header__logo' src={logoImg} alt="Rick and Morty logo" />
 
         <div className='c-header__search' >
           <input 
@@ -57,7 +67,7 @@ export function Home() {
             placeholder='Search characters' 
             onChange={e => setCharacterName(e.target.value)}
             onKeyDown={e => {
-              handleKeyDown(e.key); 
+              handleKeyDown(e.key, e.target.value); 
               setCharacterName(e.target.value);
             }} />
           <button className='c-button' type='button' onClick={() => {searchCharactersByName(1)}}>Search</button>
