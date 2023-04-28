@@ -1,6 +1,56 @@
 .c-pagination {
     display: flex;
     justify-content: center;
-    margin: 30px auto;
-    background-color: white;
+    margin: 10px auto 50px;
+    width: fit-content;
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: 0px 0px 20px 10px #000;
+
+    /* Background gradient */
+    background: #444444;
+    background: -moz-linear-gradient(top,  #444444 0%, #000000 100%);
+    background: -webkit-linear-gradient(top,  #444444 0%,#000000 100%);
+    background: linear-gradient(to bottom,  #444444 0%,#000000 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#000000',GradientType=0 );
+}
+
+.MuiPagination-ul li button {
+    font-size: 25px;
+    padding: 10px;
+    margin: 3px;
+    height: 37px;
+    border-radius: 50%;
+    border-color: #fff;
+    background-color: transparent;
+    border-width: 2px;
+    color: #fff;
+}
+
+.MuiPagination-ul li button:hover {
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0px 0px 1px 0 white;
+    font-weight: bold;
+}
+
+.MuiPagination-ul li div {
+    font-size: 25px;
+    color: #fff;
+}
+
+button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-sizeMedium.MuiPaginationItem-outlined.MuiPaginationItem-circular.MuiPaginationItem-outlinedSecondary.Mui-selected.MuiPaginationItem-page.css-1aczowp-MuiButtonBase-root-MuiPaginationItem-root {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+    box-shadow: 0px 0px 1px 0 white;
+    font-weight: bold;
+}
+
+svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiPaginationItem-icon.css-g2z002-MuiSvgIcon-root-MuiPaginationItem-icon {
+    font-size: 35px;
+}
+
+button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-sizeMedium.MuiPaginationItem-outlined.MuiPaginationItem-circular.MuiPaginationItem-outlinedSecondary.MuiPaginationItem-previousNext.css-1aczowp-MuiButtonBase-root-MuiPaginationItem-root {
+    border: 0;
 }

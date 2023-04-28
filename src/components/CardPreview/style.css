@@ -1,25 +1,29 @@
 .c-cardPreview {
-    margin: 20px 44px;
+    margin: 20px 25px;
     width: 200px;
     height: 250px;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
+}
+
+.c-cardPreviewButton:hover {
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 5px #fff;
     cursor: pointer;
 }
 
-.c-cardPreview:hover {
-    background-color: #fff;
-    box-shadow: 0px 0px 10px 5px white;
-}
-
-.c-cardPreview:active {
+.c-cardPreviewButton:active {
     transform: translateY(2px);
 }
 
-.c-cardPreview__avatar {
+.c-cardPreview__avatar--alive, .c-cardPreview__avatar--dead {
     width: 100%;
     border-radius: 12px 12px 0 0;
+}
+
+.c-cardPreview__avatar--dead {
+    filter: grayscale(1);
 }
 
 .c-cardPreview__info {
@@ -41,5 +45,3 @@
     font-size: 20px;
     text-align: center;
 }
-
-
