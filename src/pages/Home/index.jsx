@@ -1,21 +1,23 @@
-import React, {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 import './style.css';
 
 import {CardPreviewButton} from '../../components/CardPreview/index';
-import {CardDetails} from '../../components/CardDetails';
-import {Pagination} from '../../components/Pagination';
+import {PaginationComponent} from '../../components/Pagination';
 
 export function Home() {
   const [characterName, setCharacterName] = useState('');
   const [characters, setCharacters] = useState([]);
-  const [actualPage, setActualPage] = useState();
-  const [pages, setPages] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pages, setPages] = useState(1);
+  const [showPagination, setShowPagination] = useState(false);
 
-  const searchCharactersByName = async () => {
+  const searchCharactersByName = async (page = 1) => {
+    setCurrentPage(page);
+    setShowPagination(true);
 
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${characterName}&page=${actualPage}`);
+      const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${characterName}&page=${page}`);
       const results = response.data.results;
       const pagesCount = response.data.info.pages;
 
@@ -28,8 +30,12 @@ export function Home() {
 
   const handleKeyDown = (keyPressed) => {
     if(keyPressed === 'Enter') {
-      searchCharactersByName();
+      searchCharactersByName(1);
     }
+  }
+
+  const handlePaginationChange = (page) => {
+    searchCharactersByName(page);
   }
 
   return (
@@ -47,7 +53,7 @@ export function Home() {
               handleKeyDown(e.key); 
               setCharacterName(e.target.value);
             }} />
-          <button className='c-button' type='button' onClick={() => {searchCharactersByName()}}>Search</button>
+          <button className='c-button' type='button' onClick={() => {searchCharactersByName(1)}}>Search</button>
         </div>
       </section>
 
@@ -61,6 +67,8 @@ export function Home() {
           )) 
         }
       </section>
+
+      {showPagination && <PaginationComponent handlePaginationChange={handlePaginationChange} pages={pages} currentPage={currentPage} />}
     </>
   )
 }

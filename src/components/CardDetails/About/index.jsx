@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 
 import './style.css';
 
@@ -35,9 +35,9 @@ export function About({character}) {
         }
     }
 
-useEffect(() => {
-    generateLastSeen();
-}, []);
+    useEffect(() => {
+        generateLastSeen();
+    }, []);
 
     const generateAboutPhrase = () => {
         return `${character?.name} is a ${(character?.gender).toLowerCase()} ${(character.species).toLowerCase()}. ${generateStatus()}. Last seen ${lastSeen}.`;
