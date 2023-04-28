@@ -27,8 +27,8 @@ export function Location({character}) {
             <div className='c-cardDetails__topic c-cardDetails__location'>
                 <h2 className='c-cardDetails__topicTitle'>LOCATION</h2>
                 <p className='c-cardDetails__locationInfo'><small>{locationInfo?.type}</small></p>
-                <h2 className='c-cardDetails__locationInfo'>{locationInfo?.name}</h2>
-                <p className='c-cardDetails__locationInfo'>{locationInfo?.dimension}</p>
+                <h2 className='c-cardDetails__locationInfo c-cardDetails__locationInfoName'>{locationInfo?.name}</h2>
+                <p className='c-cardDetails__locationInfo'><small>{locationInfo?.dimension}</small></p>
 
                 {character?.location?.url !== '' 
                     ? <div className='c-cardDetails__residents'><img className='c-cardDetails__residentsImg c-cardDetails__locationInfo' src="./src/assets/Residents.svg" alt="Residents image" /><p className='c-cardDetails__locationInfo'><small>{locationInfo?.residents?.length} residents</small></p></div>

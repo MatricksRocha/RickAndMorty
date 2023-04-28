@@ -28,8 +28,8 @@ export function Origin({character}) {
             <div className='c-cardDetails__topic c-cardDetails__origin'>
                 <h2 className='c-cardDetails__topicTitle'>ORIGIN</h2>
                 <p className='c-cardDetails__originInfo'><small>{originInfo?.type}</small></p>
-                <h2 className='c-cardDetails__originInfo'>{originInfo?.name}</h2>
-                <p className='c-cardDetails__originInfo'>{originInfo?.dimension}</p>
+                <h2 className='c-cardDetails__originInfo c-cardDetails__originInfoName'>{originInfo?.name}</h2>
+                <p className='c-cardDetails__originInfo'><small>{originInfo?.dimension}</small></p>
 
                 {character?.origin?.url !== '' 
                     ? <div className='c-cardDetails__residents'><img className='c-cardDetails__residentsImg c-cardDetails__originInfo' src='./src/assets/Residents.svg' alt='Residents image' /> <p className='c-cardDetails__originInfo'><small>{originInfo?.residents?.length} residents</small></p></div> 

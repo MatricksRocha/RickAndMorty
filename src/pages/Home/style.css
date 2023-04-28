@@ -56,3 +56,25 @@
     max-width: 1440px;
     min-width: 300px;
 }
+
+@media (max-width: 767px) {
+    .c-header__logo {
+        width: 280px;
+    }
+
+    .c-header__input {
+        font-size: 17px;
+        width: 250px;
+        height: 50px;
+        margin-right: 0;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .c-header__search {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+}
