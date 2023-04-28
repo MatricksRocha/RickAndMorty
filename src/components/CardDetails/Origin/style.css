@@ -16,7 +16,7 @@
 
 @media(max-width: 767px) {
     .c-cardDetails__origin {
-        width: 150px;
+        width: 320px;
     }
 
     .c-cardDetails__originInfoName {
