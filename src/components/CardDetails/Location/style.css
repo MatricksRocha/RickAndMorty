@@ -14,10 +14,10 @@
     width: fit-content;
 }
 
-@media(max-width: 767px) {
+@media(max-width: 991px) {
     .c-cardDetails__location {
         width: 320px;
-        margin-bottom: 20px;
+        margin-bottom: 7px;
     }
 
     .c-cardDetails__locationInfoName {

@@ -57,7 +57,7 @@
 
 @media (max-width: 767px) {
     .c-cardPreview {
-        margin: 10px 10px;
+        margin: 7px 7px;
         width: 150px;
         height: 200px;
         display: flex;

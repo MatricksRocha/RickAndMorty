@@ -14,7 +14,7 @@
     width: fit-content;
 }
 
-@media(max-width: 767px) {
+@media(max-width: 991px) {
     .c-cardDetails__origin {
         width: 320px;
     }

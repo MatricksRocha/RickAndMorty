@@ -40,7 +40,9 @@ export function Home() {
   }
 
   const handlePaginationChange = (page) => {
-    searchCharactersByName(page);
+    if(currentPage !== page) {
+      searchCharactersByName(page);
+    }
   }
 
   return (
